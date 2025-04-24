@@ -46,6 +46,21 @@ sys_kill(void)
 }
 
 int
+sys_term(void)
+{
+  int pid;
+
+  if(argint(0, &pid) < 0)
+    return -1;
+
+  if ((pid & 0b001) != 0){
+    return -1;
+  }
+
+  return kill(pid);
+}
+
+int
 sys_getpid(void)
 {
   return myproc()->pid;
