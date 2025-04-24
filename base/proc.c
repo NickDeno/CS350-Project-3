@@ -90,6 +90,7 @@ found:
   p->state = EMBRYO;
   p->pid = nextpid++;
   p->priority = 10;
+  p->sigmask = 0;
   release(&ptable.lock);
 
   // Allocate kernel stack.
@@ -599,4 +600,36 @@ p_stat(int pid)
 	}
 	release(&ptable.lock);
 	return ret;
+}
+
+int
+mask(int bin_mask)
+{
+  myproc()->sigmask = bin_mask;
+  return 0;
+}
+
+int
+term(int pid)
+{
+  struct proc *p;
+
+  acquire(&ptable.lock);
+  for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
+    if(p->pid == pid){
+      if((p->sigmask & 0b001) != 0){
+	release(&ptable.lock);
+	return -1;
+      }
+      
+      p->killed = 1;
+      // Wake process from sleep if necessary.
+      if(p->state == SLEEPING || p->state == BLOCKED)
+        p->state = RUNNABLE;
+      release(&ptable.lock);
+      return 0;
+    }
+  }
+  release(&ptable.lock);
+  return -1;
 }

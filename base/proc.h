@@ -51,6 +51,7 @@ struct proc {
   char name[16];               // Process name (debugging)
 
   int priority;
+  int sigmask;
 };
 
 // Process memory is laid out contiguously, low addresses first:
@@ -66,3 +67,4 @@ typedef enum _ENUM_SCHEDULER{
     SCHEDULER_STRIDE
 } ENUM_SCHEDULER;
 
+int mask(int bit_mask);

@@ -2,10 +2,12 @@
 #include "stat.h"
 #include "user.h"
 
+/*
 //#define STUB_FUNCS
 #ifndef STUB_FUNCS
 int mask(int m){};
 #endif
+*/
 
 int
 main(int argc, char *argv[])

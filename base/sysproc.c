@@ -7,6 +7,16 @@
 #include "mmu.h"
 #include "proc.h"
 
+int
+sys_mask(void)
+{
+  int bit_mask;
+
+  if(argint(0, &bit_mask) < 0)
+    return -1;
+  return mask(bit_mask);
+}
+
 int sys_pstat(void){
   int pid;
 
@@ -52,12 +62,7 @@ sys_term(void)
 
   if(argint(0, &pid) < 0)
     return -1;
-
-  if ((pid & 0b001) != 0){
-    return -1;
-  }
-
-  return kill(pid);
+  return term(pid);
 }
 
 int
