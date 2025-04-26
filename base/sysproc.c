@@ -65,6 +65,20 @@ sys_term(void)
   return term(pid);
 }
 
+int sys_stop (void){
+  int pid;
+  if(argint(0, &pid) < 0)
+    return -1;
+  return stop(pid);
+}
+
+int sys_cont (void){
+  int pid;
+  if(argint(0, &pid) < 0)
+    return -1;
+  return cont(pid);
+}
+
 int
 sys_getpid(void)
 {

@@ -26,3 +26,5 @@
 #define SYS_pstat 25
 #define SYS_term 26
 #define SYS_mask 27
+#define SYS_stop 28
+#define SYS_cont 29

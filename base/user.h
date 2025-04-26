@@ -28,6 +28,8 @@ int chpr(int pid, int priority);
 int pstat(int pid);
 int term(int pid);
 int mask(int bin_mask);
+int stop(int pid);
+int cont(int pid);
 
 // ulib.c
 int stat(char*, struct stat*);

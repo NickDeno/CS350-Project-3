@@ -618,8 +618,8 @@ term(int pid)
   for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
     if(p->pid == pid){
       if((p->sigmask & 0b001) != 0){
-	release(&ptable.lock);
-	return -1;
+	      release(&ptable.lock);
+	      return -1;
       }
       
       p->killed = 1;
@@ -632,4 +632,40 @@ term(int pid)
   }
   release(&ptable.lock);
   return -1;
+}
+
+int stop(int pid){
+  struct proc *p;
+
+  acquire(&ptable.lock);
+  for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
+    if(p->pid == pid){
+      if((p->sigmask & 0b010)!=0){
+        release(&ptable.lock);
+	      return -1;
+      }
+      if(p->state == RUNNABLE || p->state ==RUNNING){
+        p->state = BLOCKED;
+      }
+      break;
+    }
+  }
+  release(&ptable.lock);
+  return 0;
+}
+
+int cont(int pid){
+  struct proc *p;
+
+  acquire(&ptable.lock);
+  for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
+    if(p->pid == pid){
+      if(p->state == BLOCKED){
+        p->state = RUNNABLE;
+      }
+      break;
+    }
+  }
+  release(&ptable.lock);
+  return 0;
 }
