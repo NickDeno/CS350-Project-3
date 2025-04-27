@@ -8,7 +8,7 @@
 //int term(int pid){}
 //int stop(int pid){}
 //int cont(int pid){}
-int interrupt(int pid){}
+//int interrupt(int pid){}
 #endif
 
 void

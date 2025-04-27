@@ -28,3 +28,4 @@
 #define SYS_mask 27
 #define SYS_stop 28
 #define SYS_cont 29
+#define SYS_interrupt 30

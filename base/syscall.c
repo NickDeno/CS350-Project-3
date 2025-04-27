@@ -116,6 +116,7 @@ extern int sys_term(void);
 extern int sys_mask(void);
 extern int sys_stop(void);
 extern int sys_cont(void);
+extern int sys_interrupt(void);
 
 static int (*syscalls[])(void) = {
 [SYS_fork]    sys_fork,
@@ -147,6 +148,7 @@ static int (*syscalls[])(void) = {
 [SYS_mask]    sys_mask,
 [SYS_stop]    sys_stop,
 [SYS_cont]    sys_cont,
+[SYS_interrupt] sys_interrupt,
 };
 
 void

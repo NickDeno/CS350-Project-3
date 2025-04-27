@@ -80,6 +80,15 @@ int sys_cont (void){
 }
 
 int
+sys_interrupt(void)
+{
+  int pid;
+  if(argint(0, &pid) < 0)
+    return -1;
+  return interrupt(pid);  
+}
+
+int
 sys_getpid(void)
 {
   return myproc()->pid;
