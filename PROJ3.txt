@@ -1,0 +1,1 @@
+Sky: Implemented SIG_TERM and the masking setup
