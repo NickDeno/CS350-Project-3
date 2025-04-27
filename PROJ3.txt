@@ -1,1 +1,2 @@
 Sky: Implemented SIG_TERM and the masking setup
+Nicholas: Implemented SIG_INT functionality
