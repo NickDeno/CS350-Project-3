@@ -7,6 +7,8 @@
 #include "mmu.h"
 #include "proc.h"
 
+extern int ipid;
+
 int
 sys_mask(void)
 {
@@ -77,6 +79,14 @@ int sys_cont (void){
   if(argint(0, &pid) < 0)
     return -1;
   return cont(pid);
+}
+
+int sys_setipid(void){
+  int pid;
+  if(argint(0, &pid) < 0)
+    return -1;
+  ipid = pid;
+  return 0;
 }
 
 int

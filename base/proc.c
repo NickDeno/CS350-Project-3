@@ -689,3 +689,17 @@ interrupt(int pid){
   release(&ptable.lock);
   return -1;
 }
+
+struct proc* getproc(int pid){
+  struct proc *p;
+
+  acquire(&ptable.lock);
+  for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
+    if(p->pid == pid){
+      release(&ptable.lock);
+      return p;
+    }
+  }
+  release(&ptable.lock);
+  return 0;
+}

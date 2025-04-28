@@ -1,2 +1,9 @@
 Sky: Implemented SIG_TERM and the masking setup
 Nicholas: Implemented SIG_INT functionality
+Cole: Implemented SIG_STOP, SIG_CONT, and the extra credit
+
+For the extra credit:
+The initial implementaion when ran on the signal test interrupted the process that was currently executing, not the process invoked by the command.
+Making it work the way ^c usually does required tracking the pid of the last process invoked and interrupting that process. This was done by creating
+another syscall that is invoked in the main function of sh.c to store it. Then when a console command is ran, it calls setipid, the new syscall, 
+which stores the invoked pid to be referenced when ^c is executed.
